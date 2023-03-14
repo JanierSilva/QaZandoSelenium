@@ -22,11 +22,13 @@ public class DescontosSteps {
 
     @Quando("^clico em ganhar cupom$")
     public void clico_em_ganhar_cupom() {
+        driver.findElement(By.cssSelector("input-content>h3")).click();
         driver.findElement(By.id("button")).click();
     }
 
     @Então("^eu vejo o código de desconto$")
     public void eu_vejo_o_código_de_desconto() {
-
+        String texto_cupom = driver.findElement(By.cssSelector("cupom > h2 > span")).getText();
+        System.out.println(texto_cupom);
     }
 }
