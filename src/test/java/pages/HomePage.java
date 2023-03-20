@@ -1,11 +1,11 @@
 package pages;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import support.Utils;
 
-public class HomePage {
+public class HomePage extends Utils {
 
     WebDriver driver;
     public HomePage(WebDriver driver) {
@@ -14,6 +14,7 @@ public class HomePage {
 
     public void acessarAplicacao(){
         driver.get("https://qazando.com.br/curso.html");
+        waitElementBePresent(By.id("btn-ver-cursos"), 10 );
         Assert.assertEquals("Não acessou a aplicação!",true, driver.findElement(By.id("btn-ver-cursos")).isDisplayed());
     }
     public void scrollDown() throws InterruptedException {
@@ -23,5 +24,15 @@ public class HomePage {
     }
     public void preencheEmail(){
 
+        driver.findElement(By.id("email")).sendKeys("finotti@qazando.com.br");
+
+    }
+    public void clickDesconto  (){
+        driver.findElement(By.id("button")).click();
+
+    }
+    public void verificarCupomDesconto(){
+        String texto_cupom = driver.findElement(By.cssSelector("#cupom > h2 > span")).getText();
+        Assert.assertEquals("o cupom está errado!", "QAZANDO15OFF", texto_cupom);
     }
 }
